@@ -6,7 +6,7 @@
     <artifactId>api</artifactId>
     <version>2.0.0</version>
     <packaging>jar</packaging>
-    <name>java-upwork</name>
+    <name>java-upwork-oauth2</name>
     <description>JAVA bindings for Upwork API (OAuth2)</description>
     <organization>
         <name>Upwork</name>
