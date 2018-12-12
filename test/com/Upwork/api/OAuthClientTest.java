@@ -48,9 +48,11 @@ public class OAuthClientTest {
         when(authorizationCodeFlowMock.newTokenRequest(Matchers.anyString())).thenReturn(authzCodeTokenRequestMock);
 
         when(authzCodeTokenRequestMock.setRedirectUri(Matchers.anyString())).thenReturn(authzCodeTokenRequestMock);
+        when(authzCodeTokenRequestMock.setRequestInitializer(Matchers.any())).thenCallRealMethod();
 
         PowerMockito.whenNew(RefreshTokenRequest.class).withAnyArguments().thenReturn(refreshTokenRequestMock);
         when(refreshTokenRequestMock.setClientAuthentication(Matchers.any(ClientParametersAuthentication.class))).thenReturn(refreshTokenRequestMock);
+        when(refreshTokenRequestMock.setRequestInitializer(Matchers.any())).thenCallRealMethod();
 
         TokenResponse tokenResponse = new TokenResponse();
         tokenResponse.setAccessToken(accessToken);

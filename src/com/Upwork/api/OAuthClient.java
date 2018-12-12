@@ -53,6 +53,8 @@ public class OAuthClient {
     private static final String DATA_FORMAT = "json";
     private static final String UPWORK_BASE_URL = "https://www.upwork.com/";
 
+    private static final String UPWORK_LIBRARY_USER_AGENT = "Github Upwork API Java Client";
+
 	private static final String TOKEN_SERVER_URL = UPWORK_BASE_URL + "api/v3/oauth2/token";
 	private static final String AUTHORIZATION_SERVER_URL = UPWORK_BASE_URL + "ab/account-security/oauth2/authorize";
 
@@ -120,6 +122,7 @@ public class OAuthClient {
 	public TokenResponse getTokenResponseByCode(String code, CredentialRefreshListener refreshListener) throws TokenResponseException, IOException {
         TokenResponse tokenResponse = authorizationCodeFlow.newTokenRequest(code)
                 .setRedirectUri(redirectUri)
+				.setRequestInitializer(httpRequest -> httpRequest.getHeaders().setUserAgent(UPWORK_LIBRARY_USER_AGENT))
                 .execute();
         setTokenResponse(tokenResponse, refreshListener);
         return tokenResponse;
@@ -136,6 +139,7 @@ public class OAuthClient {
     public TokenResponse getTokenResponseByRefreshToken(String refreshToken, CredentialRefreshListener refreshListener) throws TokenResponseException, IOException {
         TokenResponse tokenResponse = new RefreshTokenRequest(HTTP_TRANSPORT, JSON_FACTORY, new GenericUrl(TOKEN_SERVER_URL), refreshToken)
                 .setClientAuthentication(new ClientParametersAuthentication(clientId, clientSecret))
+				.setRequestInitializer(httpRequest -> httpRequest.getHeaders().setUserAgent(UPWORK_LIBRARY_USER_AGENT))
                 .execute();
         setTokenResponse(tokenResponse, refreshListener);
         return tokenResponse;
@@ -278,6 +282,7 @@ public class OAuthClient {
         }
         try {
             HttpRequest request = HTTP_REQUEST_FACTORY.buildGetRequest(genericUrl);
+            request.getHeaders().setUserAgent(UPWORK_LIBRARY_USER_AGENT);
             credential.intercept(request);
             return UpworkRestClient.executeRequest(request);
         } catch (IOException e) {
@@ -319,6 +324,7 @@ public class OAuthClient {
                     new GenericUrl(fullUrl),
                     new JsonHttpContent(JSON_FACTORY, params)
             );
+			request.getHeaders().setUserAgent(UPWORK_LIBRARY_USER_AGENT);
             credential.intercept(request);
             return UpworkRestClient.executeRequest(request);
         } catch (IOException e) {
