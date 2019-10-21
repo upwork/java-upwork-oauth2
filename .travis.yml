@@ -1,14 +1,7 @@
 language: java
 install: mvn install -DskipTests=true -Dgpg.skip=true
-jdk:
-  - oraclejdk9
-  - openjdk11
 script:
   - ant test
-matrix:
-  allow_failures:
-    - jdk: openjdk8
-  fast_finish: true
 notifications:
   email:
     recipients:
