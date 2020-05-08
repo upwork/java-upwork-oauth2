@@ -4,7 +4,7 @@
 
     <groupId>com.Upwork</groupId>
     <artifactId>api</artifactId>
-    <version>2.1.0</version>
+    <version>2.1.1</version>
     <packaging>jar</packaging>
     <name>java-upwork-oauth2</name>
     <description>JAVA bindings for Upwork API (OAuth2)</description>
