@@ -36,6 +36,13 @@ public class MessagesTest extends Helper {
         assertTrue(json1 instanceof JSONObject);
 	}
 
+	@Test public void getRoomMessages() throws Exception {
+		Messages messages = new Messages(client);
+	JSONObject json1 = messages.getRoomMessages("company", "room-id", new HashMap<String, String>());
+
+        assertTrue(json1 instanceof JSONObject);
+	}
+
 	@Test public void getRoomByOffer() throws Exception {
 		Messages messages = new Messages(client);
 		JSONObject json = messages.getRoomByOffer("company", "1234", new HashMap<String, String>());
