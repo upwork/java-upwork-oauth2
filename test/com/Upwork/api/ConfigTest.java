@@ -7,7 +7,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Matchers;
 import org.mockito.Spy;
 import org.powermock.api.mockito.PowerMockito;
-import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.core.classloader.annotations.*;
 import org.powermock.modules.junit4.*;
 
 import static org.mockito.Mockito.*;
@@ -18,6 +18,7 @@ import java.util.Properties;
 import com.Upwork.api.Config;
 
 @RunWith(PowerMockRunner.class)
+@PowerMockIgnore("jdk.internal.reflect.*")
 @PrepareForTest({
     Config.class
 })
