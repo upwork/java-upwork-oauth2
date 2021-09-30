@@ -7,13 +7,14 @@ import java.util.HashMap;
 import org.json.JSONObject;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.core.classloader.annotations.*;
 import org.powermock.modules.junit4.PowerMockRunner;
 
 import com.Upwork.api.Routers.Helper;
 import com.Upwork.api.Routers.Activities.Team;
 
 @RunWith(PowerMockRunner.class)
+@PowerMockIgnore("jdk.internal.reflect.*")
 @PrepareForTest({
     Team.class
 })
