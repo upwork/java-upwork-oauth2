@@ -19,6 +19,7 @@
 package com.Upwork.api;
 
 import com.Upwork.ClassPreamble;
+import com.google.api.client.http.HttpHeaders;
 import com.google.api.client.http.HttpRequest;
 import com.google.api.client.http.HttpResponse;
 import org.json.JSONException;
@@ -49,6 +50,9 @@ public class UpworkRestClient {
         HttpResponse response = null;
 
         try {
+            // No matter what, do not throw for non 2xx responses
+            request.setThrowExceptionOnExecuteError(false);
+            // Process the request normally
             response = request.execute();
             if(response.getStatusCode() == 200) {
                 if (response.getContent() != null) {
@@ -108,8 +112,9 @@ public class UpworkRestClient {
      * @return  {@link JSONObject}
      * */
     private static JSONObject genError(HttpResponse response) throws JSONException {
-    	String code		= (String) response.getHeaders().get("X-Upwork-Error-Code");
-    	String message	= (String) response.getHeaders().get("X-Upwork-Error-Message");
+        final HttpHeaders headers = response.getHeaders();
+        String code = headers.getFirstHeaderStringValue("X-Upwork-Error-Code");
+        String message = headers.getFirstHeaderStringValue("X-Upwork-Error-Message");
     	
     	if (code == null) {
     		code = Integer.toString(response.getStatusCode());
