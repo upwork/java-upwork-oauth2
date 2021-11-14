@@ -20,10 +20,7 @@ package com.Upwork.api;
 
 import com.Upwork.ClassPreamble;
 import com.google.api.client.auth.oauth2.*;
-import com.google.api.client.http.GenericUrl;
-import com.google.api.client.http.HttpRequest;
-import com.google.api.client.http.HttpRequestFactory;
-import com.google.api.client.http.HttpTransport;
+import com.google.api.client.http.*;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.http.json.JsonHttpContent;
 import com.google.api.client.json.JsonFactory;
@@ -61,7 +58,7 @@ public class OAuthClient {
     /** Global instance of the HTTP transport. */
     private static final HttpTransport HTTP_TRANSPORT = new NetHttpTransport();
     private static final JsonFactory JSON_FACTORY = new JacksonFactory();
-    private static final HttpRequestFactory HTTP_REQUEST_FACTORY = HTTP_TRANSPORT.createRequestFactory();
+    private static HttpRequestFactory HTTP_REQUEST_FACTORY = HTTP_TRANSPORT.createRequestFactory();
 
 	private static String clientId		= null;
 	private static String clientSecret	= null;
@@ -341,5 +338,9 @@ public class OAuthClient {
 	private final String getFullUrl(String url) {
 		return UPWORK_BASE_URL + entryPoint + url + 
 			((entryPoint == "api") ? ("." + DATA_FORMAT) : "");
+	}
+
+	public static void setRequestInitializer(final HttpRequestInitializer newInitializer) {
+		HTTP_REQUEST_FACTORY = HTTP_TRANSPORT.createRequestFactory(newInitializer);
 	}
 }
