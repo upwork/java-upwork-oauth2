@@ -1,6 +1,7 @@
 package com.Upwork.test_api;
 
 import com.Upwork.api.OAuthClient;
+import com.Upwork.api.Routers.Graphql;
 import com.Upwork.api.Routers.Organization.Users;
 import com.google.api.client.auth.oauth2.TokenResponse;
 import org.json.JSONException;
@@ -12,10 +13,9 @@ import java.util.Scanner;
  * Hello world! Test Upwork API
  *
  */
-public class App
-{
+public class App {
     @SuppressWarnings("unused")
-    public static void main( String[] args ) throws Exception {
+    public static void main(String[] args) throws Exception {
         OAuthClient client = new OAuthClient(null);
 
         // (replace with your flow) Read existent token pair
@@ -39,7 +39,8 @@ public class App
             scanner.close();
 
             TokenResponse tokenResponse = client.getTokenResponseByCode(code, null);
-            // (replace with your flow) Save tokenResponse for future use, e.g. in DataStoreFactory
+            // (replace with your flow) Save tokenResponse for future use, e.g. in
+            // DataStoreFactory
             System.out.println(tokenResponse.getAccessToken());
         } else {
             System.out.println("Apply existing token pair");
@@ -47,9 +48,9 @@ public class App
         }
 
         // If you need to force the token refresh for what ever reason, you can use:
-        // TokenResponse refreshedTokenResponse = client.getTokenResponseByRefreshToken(tokenResponse.getRefreshToken(), null);
+        // TokenResponse refreshedTokenResponse =
+        // client.getTokenResponseByRefreshToken(tokenResponse.getRefreshToken(), null);
         // System.out.println(refreshedTokenResponse.getAccessToken());
-
 
         JSONObject json1 = null;
         try {
@@ -63,12 +64,41 @@ public class App
                 JSONObject user = json1.getJSONObject("user");
                 myId = user.getString("id");
                 System.out.println(myId);
-            }
-            catch (JSONException e) {
+            } catch (JSONException e) {
                 e.printStackTrace();
             }
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
-        catch (JSONException e) {
+
+        JSONObject json2 = null;
+        HashMap<String, String> params = new HashMap<String, String>();
+        params.put("query", "{\n" +
+                "             user {\n" +
+                "               id\n" +
+                "               nid\n" +
+                "             }\n" +
+                "             organization {\n" +
+                "               id\n" +
+                "             }\n" +
+                "          }");
+        try {
+            // Set org UID
+            // client.setOrgUidHeader("1234567890");
+            // Get info of authenticated user using GraphQL query
+            Graphql graphql = new Graphql(client);
+            json2 = graphql.Execute(params);
+
+            // get my uid
+            String myUid = null;
+            try {
+                JSONObject data = json2.getJSONObject("data");
+                myUid = data.getJSONObject("user").getString("id");
+                System.out.println(myUid);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        } catch (JSONException e) {
             e.printStackTrace();
         }
     }
