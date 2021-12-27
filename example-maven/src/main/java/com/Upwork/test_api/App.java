@@ -84,7 +84,7 @@ public class App {
                 "          }");
         try {
             // Set org UID
-            // client.setOrgUidHeader("1234567890");
+            // client.setOrgUidHeader("1234567890"); // Organization UID (optional)
             // Get info of authenticated user using GraphQL query
             Graphql graphql = new Graphql(client);
             json2 = graphql.Execute(params);
