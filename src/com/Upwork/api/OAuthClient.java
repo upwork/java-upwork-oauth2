@@ -4,7 +4,7 @@
  * Licensed under the Upwork's API Terms of Use;
  * you may not use this file except in compliance with the Terms.
  * You may obtain a copy of the Terms at
- * 
+ *
  *    https://developers.upwork.com/api-tos.html
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -12,7 +12,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * @author: Maksym Novozhylov <mnovozhilov@upwork.com>
  */
 
@@ -29,26 +29,27 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.HashMap;
 
-@ClassPreamble(
-    author = "Maksym Novozhylov <mnovozhilov@upwork.com>",
-    date = "10/31/2018",
-    currentRevision = 1,
-    lastModified = "11/01/2018",
-    lastModifiedBy = "Maksym Novozhylov",
-    reviewers = { "Yiota Tsakiri" }
+@ClassPreamble (
+        author = "Maksym Novozhylov <mnovozhilov@upwork.com>",
+        date = "10/31/2018",
+        currentRevision = 1,
+        lastModified = "11/01/2018",
+        lastModifiedBy = "Maksym Novozhylov",
+        reviewers = {"Yiota Tsakiri"}
 )
 public class OAuthClient {
-    private static final int METHOD_GET = 1;
-    private static final int METHOD_POST = 2;
-    private static final int METHOD_PUT = 3;
-    private static final int METHOD_DELETE = 4;
+    private static final int METHOD_GET     = 1;
+    private static final int METHOD_POST    = 2;
+    private static final int METHOD_PUT     = 3;
+    private static final int METHOD_DELETE  = 4;
 
     private static final String OVERLOAD_PARAM = "http_method";
     private static final String DATA_FORMAT = "json";
-    private static final String UPWORK_BASE_URL = "https://www.upwork.com/";
+    private static final String UPWORK_BASE_URL = "https://stage.upwork.com/";
     private static final String UPWORK_GQL_ENDPOINT = "https://api.upwork.com/graphql";
 
     private static final String UPWORK_LIBRARY_USER_AGENT = "Github Upwork API Java Client";
@@ -61,20 +62,22 @@ public class OAuthClient {
     private static final JsonFactory JSON_FACTORY = new JacksonFactory();
     private static final HttpRequestFactory HTTP_REQUEST_FACTORY = HTTP_TRANSPORT.createRequestFactory();
 
-    private static String clientId = null;
-    private static String clientSecret = null;
-    private static String redirectUri = null;
-    private static String entryPoint = "api";
-    private static String tenantId = null;
+    private static String clientId		= null;
+    private static String clientSecret	= null;
+    private static String grantType		= "code_authorization";
+    private static String redirectUri	= null;
+    private static String entryPoint	= "api";
+    private static String tenantId		= null;
 
-    private final AuthorizationCodeFlow authorizationCodeFlow;
+    private AuthorizationCodeFlow authorizationCodeFlow = null;
+    private ClientCredentialsTokenRequest clientCredentialsTokenRequest = null;
     private volatile Credential credential;
 
     /**
      * Constructor
      *
-     * @param properties Config properties
-     */
+     * @param	properties Config properties
+     * */
     public OAuthClient(Config properties) {
         if (properties == null) {
             properties = new Config(null);
@@ -82,29 +85,37 @@ public class OAuthClient {
 
         clientId = properties.getProperty("clientId");
         clientSecret = properties.getProperty("clientSecret");
-        redirectUri = properties.getProperty("redirectUri");
+        grantType = properties.getProperty("grantType");
 
-        authorizationCodeFlow = new AuthorizationCodeFlow(
-                BearerToken.authorizationHeaderAccessMethod(),
-                HTTP_TRANSPORT,
-                JSON_FACTORY,
-                new GenericUrl(TOKEN_SERVER_URL),
-                new ClientParametersAuthentication(clientId, clientSecret),
-                clientId,
-                AUTHORIZATION_SERVER_URL);
+        if (grantType.equals("client_credentials")) {
+            clientCredentialsTokenRequest = new ClientCredentialsTokenRequest(
+                    HTTP_TRANSPORT,
+                    JSON_FACTORY,
+                    new GenericUrl(TOKEN_SERVER_URL))
+                .setClientAuthentication(new ClientParametersAuthentication(clientId, clientSecret));
+        } else {
+            redirectUri = properties.getProperty("redirectUri");
+
+            authorizationCodeFlow = new AuthorizationCodeFlow(
+                    BearerToken.authorizationHeaderAccessMethod(),
+                    HTTP_TRANSPORT,
+                    JSON_FACTORY,
+                    new GenericUrl(TOKEN_SERVER_URL),
+                    new ClientParametersAuthentication(clientId, clientSecret),
+                    clientId,
+                    AUTHORIZATION_SERVER_URL
+            );
+        }
     }
 
     /**
      * Returns authorization URL.
      *
-     * @param state An opaque value used by the client to maintain state between the
-     *              request and
-     *              callback, as mentioned in <a href=
-     *              "http://tools.ietf.org/html/rfc6749#section-3.1.2.2">Registration
-     *              Requirements</a>,
+     * @param state An opaque value used by the client to maintain state between the request and
+     *              callback, as mentioned in <a href="http://tools.ietf.org/html/rfc6749#section-3.1.2.2">Registration Requirements</a>,
      *              or {@code null} for none
-     * @return URL for authorizing application
-     */
+     * @return	URL for authorizing application
+     * */
     public String getAuthorizationUrl(String state) {
         return authorizationCodeFlow.newAuthorizationUrl()
                 .setState(state)
@@ -113,16 +124,29 @@ public class OAuthClient {
     }
 
     /**
-     * Returns TokensResponse containing access and refresh tokens.
-     * Also sets the returned tokens into this client instance to be used for
-     * requests.
+     * Returns TokensResponse containing access token for Client Credentials Grant.
+     * Also sets the returned tokens into this client instance to be used for requests.
      *
-     * @param code Authorization code, which was got after authorization
-     * @return TokensResponse containing access and refresh tokens
+     * @return	TokensResponse containing access token
      * @throws TokenResponseException In case tokens cannot be obtained
-     */
-    public TokenResponse getTokenResponseByCode(String code, CredentialRefreshListener refreshListener)
-            throws TokenResponseException, IOException {
+     * */
+    public TokenResponse getClientCredentialsAccessToken(CredentialRefreshListener refreshListener) throws TokenResponseException, IOException {
+        TokenResponse tokenResponse = clientCredentialsTokenRequest
+                .setRequestInitializer(httpRequest -> httpRequest.getHeaders().setUserAgent(UPWORK_LIBRARY_USER_AGENT))
+                .execute();
+        setTokenResponse(tokenResponse, refreshListener);
+        return tokenResponse;
+    }
+
+    /**
+     * Returns TokensResponse containing access and refresh tokens.
+     * Also sets the returned tokens into this client instance to be used for requests.
+     *
+     * @param	code Authorization code, which was got after authorization
+     * @return	TokensResponse containing access and refresh tokens
+     * @throws TokenResponseException In case tokens cannot be obtained
+     * */
+    public TokenResponse getTokenResponseByCode(String code, CredentialRefreshListener refreshListener) throws TokenResponseException, IOException {
         TokenResponse tokenResponse = authorizationCodeFlow.newTokenRequest(code)
                 .setRedirectUri(redirectUri)
                 .setRequestInitializer(httpRequest -> httpRequest.getHeaders().setUserAgent(UPWORK_LIBRARY_USER_AGENT))
@@ -133,38 +157,30 @@ public class OAuthClient {
 
     /**
      * Returns TokensResponse containing access and refresh tokens.
-     * Also sets the returned tokens into this client instance to be used for
-     * requests.
+     * Also sets the returned tokens into this client instance to be used for requests.
      *
-     * @param refreshToken Refresh token used to obtain new access token
-     * @return TokensResponse containing access and refresh tokens
+     * @param	refreshToken Refresh token used to obtain new access token
+     * @return	TokensResponse containing access and refresh tokens
      * @throws TokenResponseException In case tokens cannot be obtained
-     */
-    public TokenResponse getTokenResponseByRefreshToken(String refreshToken, CredentialRefreshListener refreshListener)
-            throws TokenResponseException, IOException {
-        TokenResponse tokenResponse = new RefreshTokenRequest(HTTP_TRANSPORT, JSON_FACTORY,
-                new GenericUrl(TOKEN_SERVER_URL), refreshToken)
-                        .setClientAuthentication(new ClientParametersAuthentication(clientId, clientSecret))
-                        .setRequestInitializer(
-                                httpRequest -> httpRequest.getHeaders().setUserAgent(UPWORK_LIBRARY_USER_AGENT))
-                        .execute();
+     * */
+    public TokenResponse getTokenResponseByRefreshToken(String refreshToken, CredentialRefreshListener refreshListener) throws TokenResponseException, IOException {
+        TokenResponse tokenResponse = new RefreshTokenRequest(HTTP_TRANSPORT, JSON_FACTORY, new GenericUrl(TOKEN_SERVER_URL), refreshToken)
+                .setClientAuthentication(new ClientParametersAuthentication(clientId, clientSecret))
+                .setRequestInitializer(httpRequest -> httpRequest.getHeaders().setUserAgent(UPWORK_LIBRARY_USER_AGENT))
+                .execute();
         setTokenResponse(tokenResponse, refreshListener);
         return tokenResponse;
     }
 
     /**
      * Sets up access and refresh tokens to be used for requests with this client.
-     * If refresh token is provided, it will be used to automatically refresh access
-     * tokens when requests are made
+     * If refresh token is provided, it will be used to automatically refresh access tokens when requests are made
      * if they are expired or will expire soon (in less than 1 minute).
      *
-     * @param tokenResponse   TokenResponse contains access and refresh tokens and
-     *                        access token expiry time
-     * @param refreshListener CredentialRefreshListener which is called when tokens
-     *                        are automatically refreshed
-     */
-    public void setTokenResponse(TokenResponse tokenResponse, CredentialRefreshListener refreshListener)
-            throws IOException {
+     * @param tokenResponse TokenResponse contains access and refresh tokens and access token expiry time
+     * @param refreshListener CredentialRefreshListener which is called when tokens are automatically refreshed
+     * */
+    public void setTokenResponse(TokenResponse tokenResponse, CredentialRefreshListener refreshListener) throws IOException {
         Credential.Builder builder = new Credential.Builder(BearerToken.authorizationHeaderAccessMethod())
                 .setTransport(HTTP_TRANSPORT)
                 .setJsonFactory(JSON_FACTORY)
@@ -189,18 +205,17 @@ public class OAuthClient {
     /**
      * Setup entry point for the request(s)
      *
-     * @param ep Entry point
-     */
+     * @param	ep Entry point
+     * */
     public final void setEntryPoint(String ep) {
         entryPoint = ep;
     }
 
     /**
-     * Setup X-Upwork-API-TenantId header
-     *
-     * @param uid Organization UID (aka Tenant ID)
-     *
-     */
+     + Setup X-Upwork-API-TenantId header
+     +
+     + @param uid Organization UID (aka Tenant ID)
+     + */
     public final void setOrgUidHeader(String uid) {
         tenantId = uid;
     }
@@ -208,10 +223,10 @@ public class OAuthClient {
     /**
      * Send signed OAuth GET request without parameters
      *
-     * @param url Relative URL
-     * @throws JSONException If JSON object is invalid or request was abnormal
-     * @return {@link JSONObject} JSON Object that contains data from response
-     */
+     * @param	url Relative URL
+     * @throws	JSONException If JSON object is invalid or request was abnormal
+     * @return	{@link JSONObject} JSON Object that contains data from response
+     * */
     public JSONObject get(String url) throws JSONException {
         return sendGetRequest(url, METHOD_GET, null);
     }
@@ -219,11 +234,11 @@ public class OAuthClient {
     /**
      * Send signed OAuth GET request
      *
-     * @param url    Relative URL
-     * @param params Hash of parameters
-     * @throws JSONException If JSON object is invalid or request was abnormal
-     * @return {@link JSONObject} JSON Object that contains data from response
-     */
+     * @param	url Relative URL
+     * @param	params Hash of parameters
+     * @throws	JSONException If JSON object is invalid or request was abnormal
+     * @return	{@link JSONObject} JSON Object that contains data from response
+     * */
     public JSONObject get(String url, HashMap<String, String> params) throws JSONException {
         return sendGetRequest(url, METHOD_GET, params);
     }
@@ -231,11 +246,11 @@ public class OAuthClient {
     /**
      * Send signed OAuth POST request
      *
-     * @param url    Relative URL
-     * @param params Hash of parameters
-     * @throws JSONException If JSON object is invalid or request was abnormal
-     * @return {@link JSONObject} JSON Object that contains data from response
-     */
+     * @param	url Relative URL
+     * @param	params Hash of parameters
+     * @throws	JSONException If JSON object is invalid or request was abnormal
+     * @return	{@link JSONObject} JSON Object that contains data from response
+     * */
     public JSONObject post(String url, HashMap<String, String> params) throws JSONException {
         return sendPostRequest(url, METHOD_POST, params);
     }
@@ -243,10 +258,10 @@ public class OAuthClient {
     /**
      * Send signed OAuth PUT request
      *
-     * @param url Relative URL
-     * @throws JSONException If JSON object is invalid or request was abnormal
-     * @return {@link JSONObject} JSON Object that contains data from response
-     */
+     * @param	url Relative URL
+     * @throws	JSONException If JSON object is invalid or request was abnormal
+     * @return	{@link JSONObject} JSON Object that contains data from response
+     * */
     public JSONObject put(String url) throws JSONException {
         return sendPostRequest(url, METHOD_PUT, new HashMap<String, String>());
     }
@@ -254,11 +269,11 @@ public class OAuthClient {
     /**
      * Send signed OAuth PUT request
      *
-     * @param url    Relative URL
-     * @param params Hash of parameters
-     * @throws JSONException If JSON object is invalid or request was abnormal
-     * @return {@link JSONObject} JSON Object that contains data from response
-     */
+     * @param	url Relative URL
+     * @param	params Hash of parameters
+     * @throws	JSONException If JSON object is invalid or request was abnormal
+     * @return	{@link JSONObject} JSON Object that contains data from response
+     * */
     public JSONObject put(String url, HashMap<String, String> params) throws JSONException {
         return sendPostRequest(url, METHOD_PUT, params);
     }
@@ -266,10 +281,10 @@ public class OAuthClient {
     /**
      * Send signed OAuth DELETE request without parameters
      *
-     * @param url Relative URL
-     * @throws JSONException If JSON object is invalid or request was abnormal
-     * @return {@link JSONObject} JSON Object that contains data from response
-     */
+     * @param	url Relative URL
+     * @throws	JSONException If JSON object is invalid or request was abnormal
+     * @return	{@link JSONObject} JSON Object that contains data from response
+     * */
     public JSONObject delete(String url) throws JSONException {
         return sendPostRequest(url, METHOD_DELETE, null);
     }
@@ -277,11 +292,11 @@ public class OAuthClient {
     /**
      * Send signed OAuth DELETE request
      *
-     * @param url    Relative URL
-     * @param params Hash of parameters
-     * @throws JSONException If JSON object is invalid or request was abnormal
-     * @return {@link JSONObject} JSON Object that contains data from response
-     */
+     * @param	url Relative URL
+     * @param	params Hash of parameters
+     * @throws	JSONException If JSON object is invalid or request was abnormal
+     * @return	{@link JSONObject} JSON Object that contains data from response
+     * */
     public JSONObject delete(String url, HashMap<String, String> params) throws JSONException {
         return sendPostRequest(url, METHOD_DELETE, params);
     }
@@ -289,12 +304,12 @@ public class OAuthClient {
     /**
      * Send signed GET OAuth request
      *
-     * @param url    Relative URL
-     * @param type   Type of HTTP request (HTTP method)
-     * @param params Hash of parameters
-     * @throws JSONException If JSON object is invalid or request was abnormal
-     * @return {@link JSONObject} JSON Object that contains data from response
-     */
+     * @param	url Relative URL
+     * @param	type Type of HTTP request (HTTP method)
+     * @param	params Hash of parameters
+     * @throws	JSONException If JSON object is invalid or request was abnormal
+     * @return	{@link JSONObject} JSON Object that contains data from response
+     * */
     private JSONObject sendGetRequest(String url, Integer type, HashMap<String, String> params) throws JSONException {
         String fullUrl = getFullUrl(url);
         GenericUrl genericUrl = new GenericUrl(fullUrl);
@@ -314,16 +329,16 @@ public class OAuthClient {
     /**
      * Send signed POST OAuth request
      *
-     * @param url    Relative URL
-     * @param type   Type of HTTP request (HTTP method)
-     * @param params Hash of parameters
-     * @throws JSONException If JSON object is invalid or request was abnormal
-     * @return {@link JSONObject} JSON Object that contains data from response
-     */
+     * @param	url Relative URL
+     * @param	type Type of HTTP request (HTTP method)
+     * @param	params Hash of parameters
+     * @throws	JSONException If JSON object is invalid or request was abnormal
+     * @return	{@link JSONObject} JSON Object that contains data from response
+     * */
     private JSONObject sendPostRequest(String url, Integer type, HashMap<String, String> params) throws JSONException {
         String fullUrl = getFullUrl(url);
 
-        switch (type) {
+        switch(type) {
             case METHOD_PUT:
             case METHOD_DELETE:
                 // assign overload value
@@ -358,13 +373,13 @@ public class OAuthClient {
     /**
      * Build absolute URL
      *
-     * @param url Relative URL
-     * @return Absolute URL
-     */
+     * @param	url Relative URL
+     * @return	Absolute URL
+     * */
     private final String getFullUrl(String url) {
         return (entryPoint == "graphql")
                 ? UPWORK_GQL_ENDPOINT
                 : (UPWORK_BASE_URL + entryPoint + url +
-                        ((entryPoint == "api") ? ("." + DATA_FORMAT) : ""));
+                ((entryPoint == "api") ? ("." + DATA_FORMAT) : ""));
     }
 }
