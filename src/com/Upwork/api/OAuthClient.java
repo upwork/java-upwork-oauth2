@@ -4,7 +4,7 @@
  * Licensed under the Upwork's API Terms of Use;
  * you may not use this file except in compliance with the Terms.
  * You may obtain a copy of the Terms at
- * 
+ *
  *    https://developers.upwork.com/api-tos.html
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -12,7 +12,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  * @author: Maksym Novozhylov <mnovozhilov@upwork.com>
  */
 
@@ -29,17 +29,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.HashMap;
 
-@ClassPreamble(
-    author = "Maksym Novozhylov <mnovozhilov@upwork.com>",
-    date = "10/31/2018",
-    currentRevision = 1,
-    lastModified = "11/01/2018",
-    lastModifiedBy = "Maksym Novozhylov",
-    reviewers = { "Yiota Tsakiri" }
-)
+@ClassPreamble(author = "Maksym Novozhylov <mnovozhilov@upwork.com>", date = "10/31/2018", currentRevision = 1, lastModified = "11/01/2018", lastModifiedBy = "Maksym Novozhylov", reviewers = {
+        "Yiota Tsakiri" })
 public class OAuthClient {
     private static final int METHOD_GET = 1;
     private static final int METHOD_POST = 2;
@@ -48,7 +43,7 @@ public class OAuthClient {
 
     private static final String OVERLOAD_PARAM = "http_method";
     private static final String DATA_FORMAT = "json";
-    private static final String UPWORK_BASE_URL = "https://www.upwork.com/";
+    private static final String UPWORK_BASE_URL = "https://stage.upwork.com/";
     private static final String UPWORK_GQL_ENDPOINT = "https://api.upwork.com/graphql";
 
     private static final String UPWORK_LIBRARY_USER_AGENT = "Github Upwork API Java Client";
@@ -63,11 +58,13 @@ public class OAuthClient {
 
     private static String clientId = null;
     private static String clientSecret = null;
+    private static String grantType = "code_authorization";
     private static String redirectUri = null;
     private static String entryPoint = "api";
     private static String tenantId = null;
 
-    private final AuthorizationCodeFlow authorizationCodeFlow;
+    private AuthorizationCodeFlow authorizationCodeFlow = null;
+    private ClientCredentialsTokenRequest clientCredentialsTokenRequest = null;
     private volatile Credential credential;
 
     /**
@@ -82,16 +79,26 @@ public class OAuthClient {
 
         clientId = properties.getProperty("clientId");
         clientSecret = properties.getProperty("clientSecret");
-        redirectUri = properties.getProperty("redirectUri");
+        grantType = properties.getProperty("grantType");
 
-        authorizationCodeFlow = new AuthorizationCodeFlow(
-                BearerToken.authorizationHeaderAccessMethod(),
-                HTTP_TRANSPORT,
-                JSON_FACTORY,
-                new GenericUrl(TOKEN_SERVER_URL),
-                new ClientParametersAuthentication(clientId, clientSecret),
-                clientId,
-                AUTHORIZATION_SERVER_URL);
+        if (grantType.equals("client_credentials")) {
+            clientCredentialsTokenRequest = new ClientCredentialsTokenRequest(
+                    HTTP_TRANSPORT,
+                    JSON_FACTORY,
+                    new GenericUrl(TOKEN_SERVER_URL))
+                    .setClientAuthentication(new ClientParametersAuthentication(clientId, clientSecret));
+        } else {
+            redirectUri = properties.getProperty("redirectUri");
+
+            authorizationCodeFlow = new AuthorizationCodeFlow(
+                    BearerToken.authorizationHeaderAccessMethod(),
+                    HTTP_TRANSPORT,
+                    JSON_FACTORY,
+                    new GenericUrl(TOKEN_SERVER_URL),
+                    new ClientParametersAuthentication(clientId, clientSecret),
+                    clientId,
+                    AUTHORIZATION_SERVER_URL);
+        }
     }
 
     /**
@@ -110,6 +117,23 @@ public class OAuthClient {
                 .setState(state)
                 .setRedirectUri(redirectUri)
                 .build();
+    }
+
+    /**
+     * Returns TokensResponse containing access token for Client Credentials Grant.
+     * Also sets the returned tokens into this client instance to be used for
+     * requests.
+     *
+     * @return TokensResponse containing access token
+     * @throws TokenResponseException In case tokens cannot be obtained
+     */
+    public TokenResponse getClientCredentialsAccessToken(CredentialRefreshListener refreshListener)
+            throws TokenResponseException, IOException {
+        TokenResponse tokenResponse = clientCredentialsTokenRequest
+                .setRequestInitializer(httpRequest -> httpRequest.getHeaders().setUserAgent(UPWORK_LIBRARY_USER_AGENT))
+                .execute();
+        setTokenResponse(tokenResponse, refreshListener);
+        return tokenResponse;
     }
 
     /**
@@ -144,10 +168,9 @@ public class OAuthClient {
             throws TokenResponseException, IOException {
         TokenResponse tokenResponse = new RefreshTokenRequest(HTTP_TRANSPORT, JSON_FACTORY,
                 new GenericUrl(TOKEN_SERVER_URL), refreshToken)
-                        .setClientAuthentication(new ClientParametersAuthentication(clientId, clientSecret))
-                        .setRequestInitializer(
-                                httpRequest -> httpRequest.getHeaders().setUserAgent(UPWORK_LIBRARY_USER_AGENT))
-                        .execute();
+                .setClientAuthentication(new ClientParametersAuthentication(clientId, clientSecret))
+                .setRequestInitializer(httpRequest -> httpRequest.getHeaders().setUserAgent(UPWORK_LIBRARY_USER_AGENT))
+                .execute();
         setTokenResponse(tokenResponse, refreshListener);
         return tokenResponse;
     }
@@ -196,10 +219,10 @@ public class OAuthClient {
     }
 
     /**
-     * Setup X-Upwork-API-TenantId header
-     *
-     * @param uid Organization UID (aka Tenant ID)
-     *
+     * + Setup X-Upwork-API-TenantId header
+     * +
+     * + @param uid Organization UID (aka Tenant ID)
+     * +
      */
     public final void setOrgUidHeader(String uid) {
         tenantId = uid;

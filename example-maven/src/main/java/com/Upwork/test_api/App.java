@@ -23,12 +23,13 @@ public class App {
         // Here we create a TokenResponse object as an example
         TokenResponse existentTokenResponse = new TokenResponse();
         existentTokenResponse.setAccessToken("ACCESS-TOKEN-HERE");
-        existentTokenResponse.setRefreshToken("REFRESH-TOKEN-HERE");
+        existentTokenResponse.setRefreshToken("REFRESH-TOKEN-HERE"); // not needed for Client Credentials Grant
         existentTokenResponse.setExpiresInSeconds((long) 86399);
         existentTokenResponse.setTokenType("Bearer");
         if (existentTokenResponse.getAccessToken() == "ACCESS-TOKEN-HERE") {
             System.out.println("Request new token pair");
 
+            // start Authorization Code Grant
             // authorize application and get access token
             Scanner scanner = new Scanner(System.in);
             System.out.println("1. Copy paste the following url in your browser : ");
@@ -39,6 +40,8 @@ public class App {
             scanner.close();
 
             TokenResponse tokenResponse = client.getTokenResponseByCode(code, null);
+            // end Authorization Code Grant
+            // TokenResponse tokenResponse = client.getClientCredentialsAccessToken(null); // Client Credentials Grant
             // (replace with your flow) Save tokenResponse for future use, e.g. in
             // DataStoreFactory
             System.out.println(tokenResponse.getAccessToken());
@@ -51,6 +54,7 @@ public class App {
         // TokenResponse refreshedTokenResponse =
         // client.getTokenResponseByRefreshToken(tokenResponse.getRefreshToken(), null);
         // System.out.println(refreshedTokenResponse.getAccessToken());
+        // This works for Code Authorization Grant
 
         JSONObject json1 = null;
         try {

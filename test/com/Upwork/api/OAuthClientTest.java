@@ -32,17 +32,28 @@ public class OAuthClientTest {
     private final String accessToken = "testAccessToken";
     private final String refreshToken = "testRefreshToken";
 
-    private final AuthorizationCodeTokenRequest authzCodeTokenRequestMock = PowerMockito.mock(AuthorizationCodeTokenRequest.class);
+    private final AuthorizationCodeTokenRequest authzCodeTokenRequestMock = PowerMockito
+            .mock(AuthorizationCodeTokenRequest.class);
     private final RefreshTokenRequest refreshTokenRequestMock = PowerMockito.mock(RefreshTokenRequest.class);
+    private final ClientCredentialsTokenRequest ccTokenRequestMock = PowerMockito
+            .mock(ClientCredentialsTokenRequest.class);
 
-    private OAuthClient getMockedClient() throws Exception {
+    private OAuthClient getMockedClientCodeAuthzGrant(String grantType) throws Exception {
         when(properties.getProperty("clientId")).thenReturn("key");
         when(properties.getProperty("clientSecret")).thenReturn("secret");
         when(properties.getProperty("redirectUri")).thenReturn("https://redirectUri");
+        when(properties.getProperty("grantType")).thenReturn(grantType);
 
         final FileInputStream fileInputStreamMock = PowerMockito.mock(FileInputStream.class);
         PowerMockito.whenNew(FileInputStream.class).withArguments(Matchers.anyString()).thenReturn(fileInputStreamMock);
 
+        // Client Credentials Grant
+        ClientCredentialsTokenRequest clientCredentialsTokenRequestMock = PowerMockito.mock(ClientCredentialsTokenRequest.class);
+        PowerMockito.whenNew(ClientCredentialsTokenRequest.class).withAnyArguments().thenReturn(ccTokenRequestMock);
+        when(ccTokenRequestMock.setClientAuthentication(Matchers.any())).thenReturn(ccTokenRequestMock);
+        when(ccTokenRequestMock.setRequestInitializer(Matchers.any())).thenCallRealMethod();
+
+        // Code Authorizations Grant
         AuthorizationCodeFlow authorizationCodeFlowMock = PowerMockito.mock(AuthorizationCodeFlow.class);
         PowerMockito.whenNew(AuthorizationCodeFlow.class).withAnyArguments().thenReturn(authorizationCodeFlowMock);
         when(authorizationCodeFlowMock.newAuthorizationUrl()).thenReturn(new AuthorizationCodeRequestUrl("https://auth_host/token", "key"));
@@ -61,6 +72,7 @@ public class OAuthClientTest {
 
         when(authzCodeTokenRequestMock.execute()).thenReturn(tokenResponse);
         when(refreshTokenRequestMock.execute()).thenReturn(tokenResponse);
+        when(ccTokenRequestMock.execute()).thenReturn(tokenResponse);
 
         Config config = new Config(properties);
 
@@ -76,7 +88,7 @@ public class OAuthClientTest {
 
     @Test
     public void getAuthorizationUrl() throws Exception {
-        OAuthClient client = getMockedClient();
+        OAuthClient client = getMockedClientCodeAuthzGrant("code_authorization");
         String state = "xyz";
         String authzUrl = client.getAuthorizationUrl(state);
         GenericUrl genericUrl = new GenericUrl(authzUrl);
@@ -99,7 +111,7 @@ public class OAuthClientTest {
 
     @Test
     public void getTokenResponseByCode() throws Exception {
-        OAuthClient client = getMockedClient();
+        OAuthClient client = getMockedClientCodeAuthzGrant("code_authorization");
         TokenResponse tokenResponse = client.getTokenResponseByCode("code", null);
         assertEquals(accessToken, tokenResponse.getAccessToken());
         assertEquals(refreshToken, tokenResponse.getRefreshToken());
@@ -107,9 +119,16 @@ public class OAuthClientTest {
 
     @Test
     public void getTokenResponseByRefreshToken() throws Exception {
-        OAuthClient client = getMockedClient();
+        OAuthClient client = getMockedClientCodeAuthzGrant("code_authorization");
         TokenResponse tokenResponse = client.getTokenResponseByRefreshToken("refreshToken", null);
         assertEquals(accessToken, tokenResponse.getAccessToken());
         assertEquals(refreshToken, tokenResponse.getRefreshToken());
+    }
+
+    @Test
+    public void getClientCredentialsAccessToken() throws Exception {
+        OAuthClient client = getMockedClientCodeAuthzGrant("client_credentials");
+        TokenResponse tokenResponse = client.getClientCredentialsAccessToken(null);
+        assertEquals(accessToken, tokenResponse.getAccessToken());
     }
 }
