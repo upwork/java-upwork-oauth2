@@ -43,7 +43,7 @@ public class OAuthClient {
 
     private static final String OVERLOAD_PARAM = "http_method";
     private static final String DATA_FORMAT = "json";
-    private static final String UPWORK_BASE_URL = "https://stage.upwork.com/";
+    private static final String UPWORK_BASE_URL = "https://www.upwork.com/";
     private static final String UPWORK_GQL_ENDPOINT = "https://api.upwork.com/graphql";
 
     private static final String UPWORK_LIBRARY_USER_AGENT = "Github Upwork API Java Client";
