@@ -51,7 +51,7 @@ public final class Milestones {
 	 * @return	{@link JSONObject}
      */
     public JSONObject getActiveMilestone(String contractId) throws JSONException {
-        return oClient.get("/hr/v3/fp/milestones/statuses/active/contracts/" + contractId);
+        throw new UnsupportedOperationException("The legacy API was deprecated. Please, use GraphQL call - see example in this library.");
     }
     
     /**
@@ -62,7 +62,7 @@ public final class Milestones {
 	 * @return	{@link JSONObject}
      */
     public JSONObject getSubmissions(String milestoneId) throws JSONException {
-        return oClient.get("/hr/v3/fp/milestones/" + milestoneId + "/submissions");
+        throw new UnsupportedOperationException("The legacy API was deprecated. Please, use GraphQL call - see example in this library.");
     }
 	
 	/**
@@ -73,7 +73,7 @@ public final class Milestones {
 	 * @return	{@link JSONObject}
      */
     public JSONObject create(HashMap<String, String> params) throws JSONException {
-        return oClient.post("/hr/v3/fp/milestones", params);
+        throw new UnsupportedOperationException("The legacy API was deprecated. Please, use GraphQL call - see example in this library.");
     }
     
     /**
@@ -85,7 +85,7 @@ public final class Milestones {
 	 * @return	{@link JSONObject}
      */
     public JSONObject edit(String milestoneId, HashMap<String, String> params) throws JSONException {
-        return oClient.put("/hr/v3/fp/milestones/" + milestoneId, params);
+        throw new UnsupportedOperationException("The legacy API was deprecated. Please, use GraphQL call - see example in this library.");
     }
     
     /**
@@ -97,7 +97,7 @@ public final class Milestones {
 	 * @return	{@link JSONObject}
      */
     public JSONObject activate(String milestoneId, HashMap<String, String> params) throws JSONException {
-        return oClient.put("/hr/v3/fp/milestones/" + milestoneId + "/activate", params);
+        throw new UnsupportedOperationException("The legacy API was deprecated. Please, use GraphQL call - see example in this library.");
     }
     
     /**
@@ -109,7 +109,7 @@ public final class Milestones {
 	 * @return	{@link JSONObject}
      */
     public JSONObject approve(String milestoneId, HashMap<String, String> params) throws JSONException {
-        return oClient.put("/hr/v3/fp/milestones/" + milestoneId + "/approve", params);
+        throw new UnsupportedOperationException("The legacy API was deprecated. Please, use GraphQL call - see example in this library.");
     }
     
     /**
@@ -120,7 +120,7 @@ public final class Milestones {
 	 * @return	{@link JSONObject}
      */
     public JSONObject delete(String milestoneId) throws JSONException {
-        return oClient.delete("/hr/v3/fp/milestones/" + milestoneId);
+        throw new UnsupportedOperationException("The legacy API was deprecated. Please, use GraphQL call - see example in this library.");
     }
 
 }

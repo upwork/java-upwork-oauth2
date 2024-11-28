@@ -51,7 +51,7 @@ public final class Offers {
 	 * @return	{@link JSONObject}
      */
     public JSONObject getList(HashMap<String, String> params) throws JSONException {
-        return oClient.get("/offers/v1/clients/offers", params);
+        throw new UnsupportedOperationException("The legacy API was deprecated. Please, use GraphQL call - see example in this library.");
     }
 
     /** 
@@ -63,7 +63,7 @@ public final class Offers {
      * @return  {@link JSONObject}
      */
     public JSONObject getSpecific(String reference, HashMap<String, String> params) throws JSONException {
-        return oClient.get("/offers/v1/clients/offers/" + reference, params);
+        throw new UnsupportedOperationException("The legacy API was deprecated. Please, use GraphQL call - see example in this library.");
     }
     
     /**
@@ -74,7 +74,7 @@ public final class Offers {
 	 * @return	{@link JSONObject}
      */
     public JSONObject makeOffer(HashMap<String, String> params) throws JSONException {
-        return oClient.post("/offers/v1/clients/offers", params);
+        throw new UnsupportedOperationException("The legacy API was deprecated. Please, use GraphQL call - see example in this library.");
     }
 
 }

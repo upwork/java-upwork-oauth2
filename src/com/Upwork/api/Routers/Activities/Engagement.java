@@ -51,7 +51,7 @@ public final class Engagement {
      * @return	{@link JSONObject}
      */
     public JSONObject getSpecific(String engagement_ref) throws JSONException {
-        return oClient.get("/tasks/v2/tasks/contracts/" + engagement_ref);
+        throw new UnsupportedOperationException("The legacy API was deprecated. Please, use GraphQL call - see example in this library.");
     }
     
     /**
@@ -65,7 +65,7 @@ public final class Engagement {
      * @return	{@link JSONObject}
      */
     public JSONObject assign(String company, String team, String engagement, HashMap<String, String> params) throws JSONException {
-        return oClient.put("/otask/v1/tasks/companies/" + company + "/teams/" + team + "/engagements/" + engagement + "/tasks", params);
+        throw new UnsupportedOperationException("The legacy API was deprecated. Please, use GraphQL call - see example in this library.");
     }
     
     /**
@@ -77,7 +77,7 @@ public final class Engagement {
      * @return	{@link JSONObject}
      */
     public JSONObject assignToEngagement(String engagement_ref, HashMap<String, String> params) throws JSONException {
-        return oClient.put("/tasks/v2/tasks/contracts/" + engagement_ref, params);
+        throw new UnsupportedOperationException("The legacy API was deprecated. Please, use GraphQL call - see example in this library.");
     }
 
 }

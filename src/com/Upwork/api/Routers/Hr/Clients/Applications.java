@@ -50,7 +50,7 @@ public final class Applications {
      * @return  object
      */
     public JSONObject getList(HashMap<String, String> params) throws JSONException {
-        return oClient.get("/hr/v4/clients/applications", params);
+        throw new UnsupportedOperationException("The legacy API was deprecated. Please, use GraphQL call - see example in this library.");
     }
 
     /**
@@ -61,7 +61,7 @@ public final class Applications {
      * @return  object
      */
     public JSONObject getSpecific(String reference, HashMap<String, String> params) throws JSONException {
-        return oClient.get("/hr/v4/clients/applications/" + reference, params);
+        throw new UnsupportedOperationException("The legacy API was deprecated. Please, use GraphQL call - see example in this library.");
     }
 
 }

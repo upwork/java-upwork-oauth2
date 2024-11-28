@@ -20,16 +20,10 @@ import com.Upwork.api.Routers.Hr.Clients.Applications;
 })
 public class ApplicationsTest extends Helper {
 	@Test public void getList() throws Exception {
-		Applications applications = new Applications(client);
-    	JSONObject json = applications.getList(new HashMap<String, String>());
-        
-        assertTrue(json instanceof JSONObject);
-	}
+        // DEPRECATED
+    }
 	
 	@Test public void getSpecific() throws Exception {
-		Applications applications = new Applications(client);
-    	JSONObject json = applications.getSpecific("1234", new HashMap<String, String>());
-        
-        assertTrue(json instanceof JSONObject);
-	}
+        // DEPRECATED
+    }
 }

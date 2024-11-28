@@ -52,7 +52,7 @@ public final class Accounts {
 	 * @return	{@link JSONObject}
      */
     public JSONObject getOwned(String freelancerReference, HashMap<String, String> params) throws JSONException {
-        return oClient.get("/finreports/v2/financial_account_owner/" + freelancerReference, params);
+        throw new UnsupportedOperationException("The legacy API was deprecated. Please, use GraphQL call - see example in this library.");
     }
 
     /**
@@ -64,7 +64,7 @@ public final class Accounts {
 	 * @return	{@link JSONObject}
      */
     public JSONObject getSpecific(String entityReference, HashMap<String, String> params) throws JSONException {
-        return oClient.get("/finreports/v2/financial_accounts/" + entityReference, params);
+        throw new UnsupportedOperationException("The legacy API was deprecated. Please, use GraphQL call - see example in this library.");
     }
 
 }

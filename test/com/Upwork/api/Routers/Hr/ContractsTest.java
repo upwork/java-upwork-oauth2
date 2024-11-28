@@ -20,23 +20,14 @@ import com.Upwork.api.Routers.Hr.Contracts;
 })
 public class ContractsTest extends Helper {
 	@Test public void suspendContract() throws Exception {
-		Contracts contracts = new Contracts(client);
-    	JSONObject json = contracts.suspendContract("1234", new HashMap<String, String>());
-        
-        assertTrue(json instanceof JSONObject);
-	}
+        // DEPRECATED
+    }
 	
 	@Test public void restartContract() throws Exception {
-		Contracts contracts = new Contracts(client);
-    	JSONObject json = contracts.restartContract("1234", new HashMap<String, String>());
-        
-        assertTrue(json instanceof JSONObject);
-	}
+        // DEPRECATED
+    }
 	
 	@Test public void endContract() throws Exception {
-		Contracts contracts = new Contracts(client);
-    	JSONObject json = contracts.endContract("1234", new HashMap<String, String>());
-        
-        assertTrue(json instanceof JSONObject);
-	}
+        // DEPRECATED
+    }
 }

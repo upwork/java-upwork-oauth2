@@ -20,9 +20,6 @@ import com.Upwork.api.Routers.Hr.Interviews;
 })
 public class InterviewsTest extends Helper {
 	@Test public void invite() throws Exception {
-		Interviews interviews = new Interviews(client);
-    	JSONObject json = interviews.invite("key", new HashMap<String, String>());
-        
-        assertTrue(json instanceof JSONObject);
-	}
+        // DEPRECATED
+    }
 }

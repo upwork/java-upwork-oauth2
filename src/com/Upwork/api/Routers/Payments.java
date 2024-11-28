@@ -52,7 +52,7 @@ public final class Payments {
 	 * @return	{@link JSONObject}
      */
     public JSONObject submitBonus(String teamReference, HashMap<String, String> params) throws JSONException {
-        return oClient.post("/hr/v2/teams/" + teamReference + "/adjustments", params);
+        throw new UnsupportedOperationException("The legacy API was deprecated. Please, use GraphQL call - see example in this library.");
     }
 
 }

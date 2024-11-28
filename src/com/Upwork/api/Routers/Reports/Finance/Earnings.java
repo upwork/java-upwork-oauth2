@@ -52,7 +52,7 @@ public final class Earnings {
 	 * @return	{@link JSONObject}
      */
     public JSONObject getByFreelancer(String freelancerReference, HashMap<String, String> params) throws JSONException {
-        return oClient.get("/finreports/v2/providers/" + freelancerReference + "/earnings", params);
+        throw new UnsupportedOperationException("The legacy API was deprecated. Please, use GraphQL call - see example in this library.");
     }
 
     /**
@@ -64,7 +64,7 @@ public final class Earnings {
 	 * @return	{@link JSONObject}
      */
     public JSONObject getByFreelancersTeam(String freelancerTeamReference, HashMap<String, String> params) throws JSONException {
-        return oClient.get("/finreports/v2/provider_teams/" + freelancerTeamReference + "/earnings", params);
+        throw new UnsupportedOperationException("The legacy API was deprecated. Please, use GraphQL call - see example in this library.");
     }
     
     /**
@@ -76,7 +76,7 @@ public final class Earnings {
 	 * @return	{@link JSONObject}
      */
     public JSONObject getByFreelancersCompany(String freelancerCompanyReference, HashMap<String, String> params) throws JSONException {
-        return oClient.get("/finreports/v2/provider_companies/" + freelancerCompanyReference + "/earnings", params);
+        throw new UnsupportedOperationException("The legacy API was deprecated. Please, use GraphQL call - see example in this library.");
     }
 
     /**
@@ -88,7 +88,7 @@ public final class Earnings {
 	 * @return	{@link JSONObject}
      */
     public JSONObject getByBuyersTeam(String buyerTeamReference, HashMap<String, String> params) throws JSONException {
-        return oClient.get("/finreports/v2/buyer_teams/" + buyerTeamReference + "/earnings", params);
+        throw new UnsupportedOperationException("The legacy API was deprecated. Please, use GraphQL call - see example in this library.");
     }
     
     /**
@@ -100,7 +100,7 @@ public final class Earnings {
 	 * @return	{@link JSONObject}
      */
     public JSONObject getByBuyersCompany(String buyerCompanyReference, HashMap<String, String> params) throws JSONException {
-        return oClient.get("/finreports/v2/buyer_companies/" + buyerCompanyReference + "/earnings", params);
+        throw new UnsupportedOperationException("The legacy API was deprecated. Please, use GraphQL call - see example in this library.");
     }
 
 }

@@ -18,9 +18,6 @@ import com.Upwork.api.Routers.Auth;
 })
 public class AuthTest extends Helper {
 	@Test public void getUserInfo() throws Exception {
-		Auth auth = new Auth(client);
-    	JSONObject json = auth.getUserInfo();
-        
-        assertTrue(json instanceof JSONObject);
+		// DEPRECATED
 	}
 }

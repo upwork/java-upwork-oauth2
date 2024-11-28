@@ -49,7 +49,7 @@ public final class Profile {
 	 * @return	{@link JSONObject}
      */
     public JSONObject getSpecific(String key) throws JSONException {   
-        return oClient.get("/profiles/v1/jobs/" + key);
+        throw new UnsupportedOperationException("The legacy API was deprecated. Please, use GraphQL call - see example in this library.");
     }
 
 }

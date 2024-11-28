@@ -20,23 +20,14 @@ import com.Upwork.api.Routers.Hr.Submissions;
 })
 public class SubmissionsTest extends Helper {
 	@Test public void requestApproval() throws Exception {
-		Submissions submissions = new Submissions(client);
-    	JSONObject json = submissions.requestApproval(new HashMap<String, String>());
-        
-        assertTrue(json instanceof JSONObject);
-	}
+        // DEPRECATED
+    }
 	
 	@Test public void approve() throws Exception {
-		Submissions submissions = new Submissions(client);
-    	JSONObject json = submissions.approve("1234", new HashMap<String, String>());
-        
-        assertTrue(json instanceof JSONObject);
-	}
+        // DEPRECATED
+    }
 	
 	@Test public void reject() throws Exception {
-		Submissions submissions = new Submissions(client);
-    	JSONObject json = submissions.reject("1234", new HashMap<String, String>());
-        
-        assertTrue(json instanceof JSONObject);
-	}
+        // DEPRECATED
+    }
 }

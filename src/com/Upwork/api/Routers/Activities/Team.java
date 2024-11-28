@@ -58,7 +58,7 @@ public final class Team {
             url = "/" + code;
         }
 
-        return oClient.get("/otask/v1/tasks/companies/" + company + "/teams/" + team + "/tasks" + url);
+        throw new UnsupportedOperationException("The legacy API was deprecated. Please, use GraphQL call - see example in this library.");
     }
 
     /**
@@ -95,7 +95,7 @@ public final class Team {
 	 * @return	{@link JSONObject}
      */
     public JSONObject addActivity(String company, String team, HashMap<String, String> params) throws JSONException {
-        return oClient.post("/otask/v1/tasks/companies/" + company + "/teams/" + team + "/tasks", params);
+        throw new UnsupportedOperationException("The legacy API was deprecated. Please, use GraphQL call - see example in this library.");
     }
 
     /**
@@ -109,7 +109,7 @@ public final class Team {
 	 * @return	{@link JSONObject}
      */
     public JSONObject updateActivity(String company, String team, String code, HashMap<String, String> params) throws JSONException {
-        return oClient.put("/otask/v1/tasks/companies/" + company + "/teams/" + team + "/tasks/" + code, params);
+        throw new UnsupportedOperationException("The legacy API was deprecated. Please, use GraphQL call - see example in this library.");
     }
     
     /**
@@ -122,7 +122,7 @@ public final class Team {
 	 * @return	{@link JSONObject}
      */
     public JSONObject archiveActivity(String company, String team, String code) throws JSONException {
-        return oClient.put("/otask/v1/tasks/companies/" + company + "/teams/" + team + "/archive/" + code);
+        throw new UnsupportedOperationException("The legacy API was deprecated. Please, use GraphQL call - see example in this library.");
     }
     
     /**
@@ -135,7 +135,7 @@ public final class Team {
 	 * @return	{@link JSONObject}
      */
     public JSONObject unarchiveActivity(String company, String team, String code) throws JSONException {
-        return oClient.put("/otask/v1/tasks/companies/" + company + "/teams/" + team + "/unarchive/" + code);
+        throw new UnsupportedOperationException("The legacy API was deprecated. Please, use GraphQL call - see example in this library.");
     }
 
     /**
@@ -147,7 +147,7 @@ public final class Team {
 	 * @return	{@link JSONObject}
      */
     public JSONObject updateBatch(String company, HashMap<String, String> params) throws JSONException {
-        return oClient.put("/otask/v1/tasks/companies/" + company + "/tasks/batch", params);
+        throw new UnsupportedOperationException("The legacy API was deprecated. Please, use GraphQL call - see example in this library.");
     }
 
 }

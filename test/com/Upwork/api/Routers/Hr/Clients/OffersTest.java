@@ -20,23 +20,14 @@ import com.Upwork.api.Routers.Hr.Clients.Offers;
 })
 public class OffersTest extends Helper {
 	@Test public void getList() throws Exception {
-		Offers offers = new Offers(client);
-    	JSONObject json = offers.getList(new HashMap<String, String>());
-        
-        assertTrue(json instanceof JSONObject);
-	}
+        // DEPRECATED
+    }
 	
 	@Test public void getSpecific() throws Exception {
-		Offers offers = new Offers(client);
-    	JSONObject json = offers.getSpecific("1234", new HashMap<String, String>());
-        
-        assertTrue(json instanceof JSONObject);
-	}
+        // DEPRECATED
+    }
 	
 	@Test public void makeOffer() throws Exception {
-		Offers offers = new Offers(client);
-    	JSONObject json = offers.makeOffer(new HashMap<String, String>());
-        
-        assertTrue(json instanceof JSONObject);
-	}
+        // DEPRECATED
+    }
 }

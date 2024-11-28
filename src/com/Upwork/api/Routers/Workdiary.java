@@ -53,7 +53,7 @@ public final class Workdiary {
 	 * @return	{@link JSONObject}
      */
     public JSONObject get(String company, String date, HashMap<String, String> params) throws JSONException {
-        return oClient.get("/team/v3/workdiaries/companies/" + company + "/" + date, params);
+        throw new UnsupportedOperationException("The legacy API was deprecated. Please, use GraphQL call - see example in this library.");
     }
     
     /**
@@ -66,7 +66,7 @@ public final class Workdiary {
 	 * @return	{@link JSONObject}
      */
     public JSONObject getByContract(String contract, String date, HashMap<String, String> params) throws JSONException {
-        return oClient.get("/team/v3/workdiaries/contracts/" + contract + "/" + date, params);
+        throw new UnsupportedOperationException("The legacy API was deprecated. Please, use GraphQL call - see example in this library.");
     }
 
 }

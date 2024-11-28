@@ -18,16 +18,10 @@ import com.Upwork.api.Routers.Hr.Roles;
 })
 public class RolesTest extends Helper {
 	@Test public void getAll() throws Exception {
-		Roles roles = new Roles(client);
-    	JSONObject json = roles.getAll();
-        
-        assertTrue(json instanceof JSONObject);
-	}
+        // DEPRECATED
+    }
 	
 	@Test public void getBySpecificUser() throws Exception {
-		Roles roles = new Roles(client);
-    	JSONObject json = roles.getBySpecificUser("1234");
-        
-        assertTrue(json instanceof JSONObject);
-	}
+        // DEPRECATED
+    }
 }

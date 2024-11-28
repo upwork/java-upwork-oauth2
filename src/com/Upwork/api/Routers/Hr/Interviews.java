@@ -52,7 +52,7 @@ public final class Interviews {
 	 * @return	{@link JSONObject}
      */
     public JSONObject invite(String jobKey, HashMap<String, String> params) throws JSONException {
-        return oClient.post("/hr/v1/jobs/" + jobKey + "/candidates", params);
+        throw new UnsupportedOperationException("The legacy API was deprecated. Please, use GraphQL call - see example in this library.");
     }
 
 }

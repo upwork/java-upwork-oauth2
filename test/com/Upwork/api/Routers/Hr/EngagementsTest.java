@@ -20,16 +20,10 @@ import com.Upwork.api.Routers.Hr.Engagements;
 })
 public class EngagementsTest extends Helper {
 	@Test public void getList() throws Exception {
-		Engagements engagements = new Engagements(client);
-    	JSONObject json = engagements.getList(new HashMap<String, String>());
-        
-        assertTrue(json instanceof JSONObject);
-	}
+        // DEPRECATED
+    }
 	
 	@Test public void getSpecific() throws Exception {
-		Engagements engagements = new Engagements(client);
-    	JSONObject json = engagements.getSpecific("1234");
-        
-        assertTrue(json instanceof JSONObject);
-	}
+        // DEPRECATED
+    }
 }

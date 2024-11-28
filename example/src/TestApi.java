@@ -1,6 +1,5 @@
 import com.Upwork.api.OAuthClient;
 import com.Upwork.api.Routers.Graphql;
-import com.Upwork.api.Routers.Organization.Users;
 import com.google.api.client.auth.oauth2.TokenResponse;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -54,26 +53,7 @@ public class TestApi {
         // client.getTokenResponseByRefreshToken(tokenResponse.getRefreshToken(), null);
         // System.out.println(refreshedTokenResponse.getAccessToken());
 
-        JSONObject json1 = null;
-        try {
-            // Get info of authenticated user
-            Users users = new Users(client);
-            json1 = users.getMyInfo();
-
-            // get my uid
-            String myId = null;
-            try {
-                JSONObject user = json1.getJSONObject("user");
-                myId = user.getString("id");
-                System.out.println(myId);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        JSONObject json2 = null;
+        JSONObject json = null;
         HashMap<String, String> params = new HashMap<String, String>();
         params.put("query", "{\n" +
                 "             user {\n" +
@@ -89,12 +69,12 @@ public class TestApi {
             // client.setOrgUidHeader("1234567890"); // Organization UID (optional)
             // Get info of authenticated user using GraphQL query
             Graphql graphql = new Graphql(client);
-            json2 = graphql.Execute(params);
+            json = graphql.Execute(params);
 
             // get my uid
             String myUid = null;
             try {
-                JSONObject data = json2.getJSONObject("data");
+                JSONObject data = json.getJSONObject("data");
                 myUid = data.getJSONObject("user").getString("id");
                 System.out.println(myUid);
             } catch (JSONException e) {
