@@ -20,37 +20,22 @@ import com.Upwork.api.Routers.Reports.Finance.Billings;
 })
 public class BillingsTest extends Helper {
 	@Test public void getByFreelancer() throws Exception {
-		Billings billings = new Billings(client);
-    	JSONObject json = billings.getByFreelancer("1234", new HashMap<String, String>());
-        
-        assertTrue(json instanceof JSONObject);
-	}
+        // DEPRECATED
+    }
 	
 	@Test public void getByFreelancersTeam() throws Exception {
-		Billings billings = new Billings(client);
-    	JSONObject json = billings.getByFreelancersTeam("1234", new HashMap<String, String>());
-        
-        assertTrue(json instanceof JSONObject);
-	}
+        // DEPRECATED
+    }
 	
 	@Test public void getByFreelancersCompany() throws Exception {
-		Billings billings = new Billings(client);
-    	JSONObject json = billings.getByFreelancersCompany("1234", new HashMap<String, String>());
-        
-        assertTrue(json instanceof JSONObject);
-	}
+        // DEPRECATED
+    }
 	
 	@Test public void getByBuyersTeam() throws Exception {
-		Billings billings = new Billings(client);
-    	JSONObject json = billings.getByBuyersTeam("1234", new HashMap<String, String>());
-        
-        assertTrue(json instanceof JSONObject);
-	}
+        // DEPRECATED
+    }
 	
 	@Test public void getByBuyersCompany() throws Exception {
-		Billings billings = new Billings(client);
-    	JSONObject json = billings.getByBuyersCompany("1234", new HashMap<String, String>());
-        
-        assertTrue(json instanceof JSONObject);
-	}
+        // DEPRECATED
+    }
 }

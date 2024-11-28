@@ -48,7 +48,7 @@ public final class Companies {
 	 * @return	{@link JSONObject}
      */
     public JSONObject getList() throws JSONException {   
-        return oClient.get("/hr/v2/companies");
+        throw new UnsupportedOperationException("The legacy API was deprecated. Please, use GraphQL call - see example in this library.");
     }   
 
     /** 
@@ -59,7 +59,7 @@ public final class Companies {
 	 * @return	{@link JSONObject}
      */
     public JSONObject getSpecific(String cmpReference) throws JSONException {   
-        return oClient.get("/hr/v2/companies/" + cmpReference);
+        throw new UnsupportedOperationException("The legacy API was deprecated. Please, use GraphQL call - see example in this library.");
     }
     
     /**
@@ -70,7 +70,7 @@ public final class Companies {
 	 * @return	{@link JSONObject}
      */
     public JSONObject getTeams(String cmpReference) throws JSONException {
-        return oClient.get("/hr/v2/companies/" + cmpReference + "/teams");
+        throw new UnsupportedOperationException("The legacy API was deprecated. Please, use GraphQL call - see example in this library.");
     }
 
     /**
@@ -81,7 +81,7 @@ public final class Companies {
 	 * @return	{@link JSONObject}
      */
     public JSONObject getUsers(String cmpReference) throws JSONException {
-        return oClient.get("/hr/v2/companies/" + cmpReference + "/users");
+        throw new UnsupportedOperationException("The legacy API was deprecated. Please, use GraphQL call - see example in this library.");
     }
 
 }

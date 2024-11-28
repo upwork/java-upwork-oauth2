@@ -35,7 +35,7 @@ public final class Messages {
      * @return	{@link JSONObject}
      */
     public JSONObject getRooms(String company) throws JSONException {
-        return oClient.get("/messages/v3/" + company + "/rooms");
+        throw new UnsupportedOperationException("The legacy API was deprecated. Please, use GraphQL call - see example in this library.");
     }
 	
     /** 
@@ -47,7 +47,7 @@ public final class Messages {
      * @return	{@link JSONObject}
      */
     public JSONObject getRooms(String company, HashMap<String, String> params) throws JSONException {
-        return oClient.get("/messages/v3/" + company + "/rooms", params);
+        throw new UnsupportedOperationException("The legacy API was deprecated. Please, use GraphQL call - see example in this library.");
     }
 
     /**
@@ -60,7 +60,7 @@ public final class Messages {
      * @return	{@link JSONObject}
      */
     public JSONObject getRoomDetails(String company, String roomId, HashMap<String, String> params) throws JSONException {
-        return oClient.get("/messages/v3/" + company + "/rooms/" + roomId, params);
+        throw new UnsupportedOperationException("The legacy API was deprecated. Please, use GraphQL call - see example in this library.");
     }
 
     /**
@@ -73,7 +73,7 @@ public final class Messages {
      * @return	{@link JSONObject}
      */
     public JSONObject getRoomMessages(String company, String roomId, HashMap<String, String> params) throws JSONException {
-        return oClient.get("/messages/v3/" + company + "/rooms/" + roomId + "/stories", params);
+        throw new UnsupportedOperationException("The legacy API was deprecated. Please, use GraphQL call - see example in this library.");
     }
 
     /**
@@ -86,7 +86,7 @@ public final class Messages {
      * @return	{@link JSONObject}
      */
     public JSONObject getRoomByOffer(String company, String offerId, HashMap<String, String> params) throws JSONException {
-        return oClient.get("/messages/v3/" + company + "/rooms/offers/" + offerId, params);
+        throw new UnsupportedOperationException("The legacy API was deprecated. Please, use GraphQL call - see example in this library.");
     }
 
     /**
@@ -99,7 +99,7 @@ public final class Messages {
      * @return	{@link JSONObject}
      */
     public JSONObject getRoomByApplication(String company, String applicationId, HashMap<String, String> params) throws JSONException {
-        return oClient.get("/messages/v3/" + company + "/rooms/appications/" + applicationId, params);
+        throw new UnsupportedOperationException("The legacy API was deprecated. Please, use GraphQL call - see example in this library.");
     }
 
     /**
@@ -112,7 +112,7 @@ public final class Messages {
      * @return	{@link JSONObject}
      */
     public JSONObject getRoomByContract(String company, String contractId, HashMap<String, String> params) throws JSONException {
-        return oClient.get("/messages/v3/" + company + "/rooms/contracts/" + contractId, params);
+        throw new UnsupportedOperationException("The legacy API was deprecated. Please, use GraphQL call - see example in this library.");
     }
 
     /**
@@ -124,7 +124,7 @@ public final class Messages {
      * @return	{@link JSONObject}
      */
     public JSONObject createRoom(String company, HashMap<String, String> params) throws JSONException {
-        return oClient.post("/messages/v3/" + company + "/rooms", params);
+        throw new UnsupportedOperationException("The legacy API was deprecated. Please, use GraphQL call - see example in this library.");
     }
 
     /**
@@ -137,7 +137,7 @@ public final class Messages {
      * @return	{@link JSONObject}
      */
     public JSONObject sendMessageToRoom(String company, String roomId, HashMap<String, String> params) throws JSONException {
-        return oClient.post("/messages/v3/" + company + "/rooms/" + roomId + "/stories", params);
+        throw new UnsupportedOperationException("The legacy API was deprecated. Please, use GraphQL call - see example in this library.");
     }
 
     /**
@@ -149,7 +149,7 @@ public final class Messages {
      * @return	{@link JSONObject}
      */
     public JSONObject sendMessageToRooms(String company, HashMap<String, String> params) throws JSONException {
-        return oClient.post("/messages/v3/" + company + "/stories/batch", params);
+        throw new UnsupportedOperationException("The legacy API was deprecated. Please, use GraphQL call - see example in this library.");
     }
 
     /**
@@ -163,7 +163,7 @@ public final class Messages {
      * @return	{@link JSONObject}
      */
     public JSONObject updateRoomSettings(String company, String roomId, String username, HashMap<String, String> params) throws JSONException {
-        return oClient.put("/messages/v3/" + company + "/rooms/" + roomId + "/users/" + username, params);
+        throw new UnsupportedOperationException("The legacy API was deprecated. Please, use GraphQL call - see example in this library.");
     }
 
     /**
@@ -176,7 +176,7 @@ public final class Messages {
      * @return	{@link JSONObject}
      */
     public JSONObject updateRoomMetadata(String company, String roomId, HashMap<String, String> params) throws JSONException {
-        return oClient.put("/messages/v3/" + company + "/rooms/" + roomId, params);
+        throw new UnsupportedOperationException("The legacy API was deprecated. Please, use GraphQL call - see example in this library.");
     }
 
 }

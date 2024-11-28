@@ -51,7 +51,7 @@ public final class Submissions {
 	 * @return	{@link JSONObject}
      */
     public JSONObject requestApproval(HashMap<String, String> params) throws JSONException {
-        return oClient.post("/hr/v3/fp/submissions", params);
+        throw new UnsupportedOperationException("The legacy API was deprecated. Please, use GraphQL call - see example in this library.");
     }
     
     /**
@@ -63,7 +63,7 @@ public final class Submissions {
 	 * @return	{@link JSONObject}
      */
     public JSONObject approve(String submissionId, HashMap<String, String> params) throws JSONException {
-        return oClient.put("/hr/v3/fp/submissions/" + submissionId + "/approve", params);
+        throw new UnsupportedOperationException("The legacy API was deprecated. Please, use GraphQL call - see example in this library.");
     }
     
     /**
@@ -75,7 +75,7 @@ public final class Submissions {
 	 * @return	{@link JSONObject}
      */
     public JSONObject reject(String submissionId, HashMap<String, String> params) throws JSONException {
-        return oClient.put("/hr/v3/fp/submissions/" + submissionId + "/reject", params);
+        throw new UnsupportedOperationException("The legacy API was deprecated. Please, use GraphQL call - see example in this library.");
     }
 
 }

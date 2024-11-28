@@ -20,37 +20,22 @@ import com.Upwork.api.Routers.Hr.Jobs;
 })
 public class JobsTest extends Helper {
 	@Test public void getList() throws Exception {
-		Jobs jobs = new Jobs(client);
-    	JSONObject json = jobs.getList(new HashMap<String, String>());
-        
-        assertTrue(json instanceof JSONObject);
-	}
+        // DEPRECATED
+    }
 	
 	@Test public void getSpecific() throws Exception {
-		Jobs jobs = new Jobs(client);
-    	JSONObject json = jobs.getSpecific("key");
-        
-        assertTrue(json instanceof JSONObject);
-	}
+        // DEPRECATED
+    }
 	
 	@Test public void postJob() throws Exception {
-		Jobs jobs = new Jobs(client);
-    	JSONObject json = jobs.postJob(new HashMap<String, String>());
-        
-        assertTrue(json instanceof JSONObject);
-	}
+        // DEPRECATED
+    }
 	
 	@Test public void editJob() throws Exception {
-		Jobs jobs = new Jobs(client);
-    	JSONObject json = jobs.editJob("key", new HashMap<String, String>());
-        
-        assertTrue(json instanceof JSONObject);
-	}
+        // DEPRECATED
+    }
 	
 	@Test public void deleteJob() throws Exception {
-		Jobs jobs = new Jobs(client);
-    	JSONObject json = jobs.deleteJob("key", new HashMap<String, String>());
-        
-        assertTrue(json instanceof JSONObject);
-	}
+        // DEPRECATED
+    }
 }

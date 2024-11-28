@@ -20,9 +20,6 @@ import com.Upwork.api.Routers.Workdiary;
 })
 public class WorkdiaryTest extends Helper {
 	@Test public void getByContract() throws Exception {
-		Workdiary workdiary = new Workdiary(client);
-    	JSONObject json = workdiary.getByContract("1234", "date", new HashMap<String, String>());
-        
-        assertTrue(json instanceof JSONObject);
-	}
+        // DEPRECATED
+    }
 }

@@ -48,7 +48,7 @@ public final class Teams {
 	 * @return	{@link JSONObject}
      */
     public JSONObject getList() throws JSONException {   
-        return oClient.get("/hr/v2/teams");
+        throw new UnsupportedOperationException("The legacy API was deprecated. Please, use GraphQL call - see example in this library.");
     }   
 
     /** 
@@ -59,7 +59,7 @@ public final class Teams {
 	 * @return	{@link JSONObject}
      */
     public JSONObject getUsersInTeam(String teamReference) throws JSONException {   
-        return oClient.get("/hr/v2/teams/" + teamReference + "/users");
+        throw new UnsupportedOperationException("The legacy API was deprecated. Please, use GraphQL call - see example in this library.");
     }
 
 }

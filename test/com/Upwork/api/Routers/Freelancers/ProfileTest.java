@@ -18,16 +18,10 @@ import com.Upwork.api.Routers.Freelancers.Profile;
 })
 public class ProfileTest extends Helper {
 	@Test public void getSpecific() throws Exception {
-		Profile profile = new Profile(client);
-    	JSONObject json = profile.getSpecific("key");
-
-        assertTrue(json instanceof JSONObject);
-	}
+        // DEPRECATED
+    }
 
 	@Test public void getSpecificBrief() throws Exception {
-		Profile profile = new Profile(client);
-    	JSONObject json = profile.getSpecificBrief("key");
-
-        assertTrue(json instanceof JSONObject);
-	}
+        // DEPRECATED
+    }
 }

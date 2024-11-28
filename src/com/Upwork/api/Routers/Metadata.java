@@ -50,7 +50,7 @@ public final class Metadata {
 	 * @return	{@link JSONObject}
      */
     public JSONObject getCategories() throws JSONException {   
-        return oClient.get("/profiles/v1/metadata/categories");
+        throw new UnsupportedOperationException("The legacy API was deprecated. Please, use GraphQL call - see example in this library.");
     }
     
     /** 
@@ -60,7 +60,7 @@ public final class Metadata {
 	 * @return	{@link JSONObject}
      */
     public JSONObject getCategoriesV2() throws JSONException {   
-        return oClient.get("/profiles/v2/metadata/categories");
+        throw new UnsupportedOperationException("The legacy API was deprecated. Please, use GraphQL call - see example in this library.");
     }
 
     /** 
@@ -70,7 +70,7 @@ public final class Metadata {
 	 * @return	{@link JSONObject}
      */
     public JSONObject getSkills() throws JSONException {   
-        return oClient.get("/profiles/v1/metadata/skills");
+        throw new UnsupportedOperationException("The legacy API was deprecated. Please, use GraphQL call - see example in this library.");
     }
 
     /**
@@ -80,7 +80,7 @@ public final class Metadata {
 	 * @return	{@link JSONObject}
      */
     public JSONObject getSkillsV2() throws JSONException {
-        return oClient.get("/profiles/v2/metadata/skills");
+        throw new UnsupportedOperationException("The legacy API was deprecated. Please, use GraphQL call - see example in this library.");
     }
 
     /**
@@ -90,7 +90,7 @@ public final class Metadata {
 	 * @return	{@link JSONObject}
      */
     public JSONObject getSpecialties() throws JSONException {
-        return oClient.get("/profiles/v1/metadata/specialties");
+        throw new UnsupportedOperationException("The legacy API was deprecated. Please, use GraphQL call - see example in this library.");
     }
     
     /** 
@@ -100,7 +100,7 @@ public final class Metadata {
 	 * @return	{@link JSONObject}
      */
     public JSONObject getRegions() throws JSONException {   
-        return oClient.get("/profiles/v1/metadata/regions");
+        throw new UnsupportedOperationException("The legacy API was deprecated. Please, use GraphQL call - see example in this library.");
     }
 
     /**
@@ -110,7 +110,7 @@ public final class Metadata {
 	 * @return	{@link JSONObject}
      */
     public JSONObject getTests() throws JSONException {
-        return oClient.get("/profiles/v1/metadata/tests");
+        throw new UnsupportedOperationException("The legacy API was deprecated. Please, use GraphQL call - see example in this library.");
     }
     
     /**
@@ -121,7 +121,7 @@ public final class Metadata {
 	 * @return	{@link JSONObject}
      */
     public JSONObject getReasons(HashMap<String, String> params) throws JSONException {
-        return oClient.get("/profiles/v1/metadata/reasons", params);
+        throw new UnsupportedOperationException("The legacy API was deprecated. Please, use GraphQL call - see example in this library.");
     }
 
 }

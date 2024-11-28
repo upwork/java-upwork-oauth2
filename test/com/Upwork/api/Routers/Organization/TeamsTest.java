@@ -18,16 +18,10 @@ import com.Upwork.api.Routers.Organization.Teams;
 })
 public class TeamsTest extends Helper {
 	@Test public void getList() throws Exception {
-		Teams teams = new Teams(client);
-    	JSONObject json = teams.getList();
-        
-        assertTrue(json instanceof JSONObject);
-	}
+        // DEPRECATED
+    }
 	
 	@Test public void getUsersInTeam() throws Exception {
-		Teams teams = new Teams(client);
-    	JSONObject json = teams.getUsersInTeam("1234");
-        
-        assertTrue(json instanceof JSONObject);
-	}
+        // DEPRECATED
+    }
 }

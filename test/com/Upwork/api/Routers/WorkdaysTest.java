@@ -20,16 +20,10 @@ import com.Upwork.api.Routers.Workdays;
 })
 public class WorkdaysTest extends Helper {
 	@Test public void getByCompany() throws Exception {
-		Workdays workdays = new Workdays(client);
-    	JSONObject json = workdays.getByCompany("company", "20140101", "20140131", new HashMap<String, String>());
-        
-        assertTrue(json instanceof JSONObject);
-	}
+        // DEPRECATED
+    }
 	
 	@Test public void getByContract() throws Exception {
-		Workdays workdays = new Workdays(client);
-    	JSONObject json = workdays.getByContract("company", "20140101", "20140131", new HashMap<String, String>());
-        
-        assertTrue(json instanceof JSONObject);
-	}
+        // DEPRECATED
+    }
 }

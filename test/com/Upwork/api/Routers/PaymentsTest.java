@@ -20,9 +20,6 @@ import com.Upwork.api.Routers.Payments;
 })
 public class PaymentsTest extends Helper {
 	@Test public void submitBonus() throws Exception {
-		Payments payments = new Payments(client);
-    	JSONObject json = payments.submitBonus("1234", new HashMap<String, String>());
-        
-        assertTrue(json instanceof JSONObject);
-	}
+        // DEPRECATED
+    }
 }

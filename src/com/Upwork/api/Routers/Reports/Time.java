@@ -65,7 +65,7 @@ public final class Time {
             url = "/agencies/" + agency;
         }
 
-        return oClient.get("/timereports/v1/companies/" + company + url, params);
+        throw new UnsupportedOperationException("The legacy API was deprecated. Please, use GraphQL call - see example in this library.");
     }
     
     /**
@@ -128,7 +128,7 @@ public final class Time {
 	 * @return	{@link JSONObject}
      */
     public JSONObject getByFreelancerLimited(String freelancerId, HashMap<String, String> params) throws JSONException {
-        return oClient.get("/timereports/v1/providers/" + freelancerId + "/hours", params);
+        throw new UnsupportedOperationException("The legacy API was deprecated. Please, use GraphQL call - see example in this library.");
     }
 
     /**
@@ -140,7 +140,7 @@ public final class Time {
 	 * @return	{@link JSONObject}
      */
     public JSONObject getByFreelancerFull(String freelancerId, HashMap<String, String> params) throws JSONException {
-        return oClient.get("/timereports/v1/providers/" + freelancerId, params);
+        throw new UnsupportedOperationException("The legacy API was deprecated. Please, use GraphQL call - see example in this library.");
     }
 
 }

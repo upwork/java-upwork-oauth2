@@ -20,83 +20,46 @@ import com.Upwork.api.Routers.Messages;
 })
 public class MessagesTest extends Helper {
 	@Test public void getRooms() throws Exception {
-		Messages messages = new Messages(client);
-    	JSONObject json = messages.getRooms("company");
-        
-        assertTrue(json instanceof JSONObject);
-    	
-	JSONObject json2 = messages.getRooms("company", new HashMap<String, String>());
-        
-        assertTrue(json2 instanceof JSONObject);
+		// DEPRECATED
 	}
 	
 	@Test public void getRoomDetails() throws Exception {
-		Messages messages = new Messages(client);
-    	JSONObject json1 = messages.getRoomDetails("company", "room-id", new HashMap<String, String>());
-
-        assertTrue(json1 instanceof JSONObject);
+		// DEPRECATED
 	}
 
 	@Test public void getRoomMessages() throws Exception {
-		Messages messages = new Messages(client);
-	JSONObject json1 = messages.getRoomMessages("company", "room-id", new HashMap<String, String>());
-
-        assertTrue(json1 instanceof JSONObject);
+		// DEPRECATED
 	}
 
 	@Test public void getRoomByOffer() throws Exception {
-		Messages messages = new Messages(client);
-		JSONObject json = messages.getRoomByOffer("company", "1234", new HashMap<String, String>());
-
-		assertTrue(json instanceof JSONObject);
+		// DEPRECATED
 	}
 
 	@Test public void getRoomByApplication() throws Exception {
-		Messages messages = new Messages(client);
-		JSONObject json = messages.getRoomByApplication("company", "1234", new HashMap<String, String>());
-
-		assertTrue(json instanceof JSONObject);
+		// DEPRECATED
 	}
 
 	@Test public void getRoomByContract() throws Exception {
-		Messages messages = new Messages(client);
-    	JSONObject json = messages.getRoomByContract("company", "1234", new HashMap<String, String>());
-        
-        assertTrue(json instanceof JSONObject);
+		// DEPRECATED
 	}
 	
 	@Test public void createRoom() throws Exception {
-		Messages messages = new Messages(client);
-    	JSONObject json = messages.createRoom("company", new HashMap<String, String>());
-        
-        assertTrue(json instanceof JSONObject);
+		// DEPRECATED
 	}
 	
 	@Test public void sendMessageToRoom() throws Exception {
-		Messages messages = new Messages(client);
-    	JSONObject json = messages.sendMessageToRoom("company", "room-id", new HashMap<String, String>());
-        
-        assertTrue(json instanceof JSONObject);
+		// DEPRECATED
 	}
 	
 	@Test public void sendMessageToRooms() throws Exception {
-		Messages messages = new Messages(client);
-	JSONObject json = messages.sendMessageToRooms("company", new HashMap<String, String>());
-
-        assertTrue(json instanceof JSONObject);
+		// DEPRECATED
 	}
 
 	@Test public void updateRoomSettings() throws Exception {
-		Messages messages = new Messages(client);
-    	JSONObject json = messages.updateRoomSettings("company", "room-id", "username", new HashMap<String, String>());
-        
-        assertTrue(json instanceof JSONObject);
+		// DEPRECATED
 	}
 
 	@Test public void updateRoomMetadata() throws Exception {
-		Messages messages = new Messages(client);
-		JSONObject json = messages.updateRoomMetadata("company", "room-id", new HashMap<String, String>());
-
-		assertTrue(json instanceof JSONObject);
+		// DEPRECATED
 	}
 }

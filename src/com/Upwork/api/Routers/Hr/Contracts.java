@@ -52,7 +52,7 @@ public final class Contracts {
 	 * @return	{@link JSONObject}
      */
     public JSONObject suspendContract(String reference, HashMap<String, String> params) throws JSONException {   
-        return oClient.put("/hr/v2/contracts/" + reference + "/suspend", params);
+        throw new UnsupportedOperationException("The legacy API was deprecated. Please, use GraphQL call - see example in this library.");
     }
     
     /** 
@@ -64,7 +64,7 @@ public final class Contracts {
 	 * @return	{@link JSONObject}
      */
     public JSONObject restartContract(String reference, HashMap<String, String> params) throws JSONException {   
-        return oClient.put("/hr/v2/contracts/" + reference + "/restart", params);
+        throw new UnsupportedOperationException("The legacy API was deprecated. Please, use GraphQL call - see example in this library.");
     }
 	
 	/** 
@@ -76,7 +76,7 @@ public final class Contracts {
 	 * @return	{@link JSONObject}
      */
     public JSONObject endContract(String reference, HashMap<String, String> params) throws JSONException {   
-        return oClient.delete("/hr/v2/contracts/" + reference, params);
+        throw new UnsupportedOperationException("The legacy API was deprecated. Please, use GraphQL call - see example in this library.");
     }
 
 }

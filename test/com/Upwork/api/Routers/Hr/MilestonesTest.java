@@ -20,51 +20,30 @@ import com.Upwork.api.Routers.Hr.Milestones;
 })
 public class MilestonesTest extends Helper {
 	@Test public void getActiveMilestone() throws Exception {
-		Milestones milestones = new Milestones(client);
-    	JSONObject json = milestones.getActiveMilestone("1234");
-        
-        assertTrue(json instanceof JSONObject);
-	}
+        // DEPRECATED
+    }
 	
 	@Test public void getSubmissions() throws Exception {
-		Milestones milestones = new Milestones(client);
-    	JSONObject json = milestones.getSubmissions("1234");
-        
-        assertTrue(json instanceof JSONObject);
-	}
+        // DEPRECATED
+    }
 	
 	@Test public void create() throws Exception {
-		Milestones milestones = new Milestones(client);
-    	JSONObject json = milestones.create(new HashMap<String, String>());
-        
-        assertTrue(json instanceof JSONObject);
-	}
+        // DEPRECATED
+    }
 	
 	@Test public void edit() throws Exception {
-		Milestones milestones = new Milestones(client);
-    	JSONObject json = milestones.edit("1234", new HashMap<String, String>());
-        
-        assertTrue(json instanceof JSONObject);
-	}
+        // DEPRECATED
+    }
 	
 	@Test public void activate() throws Exception {
-		Milestones milestones = new Milestones(client);
-    	JSONObject json = milestones.activate("1234", new HashMap<String, String>());
-        
-        assertTrue(json instanceof JSONObject);
-	}
+        // DEPRECATED
+    }
 	
 	@Test public void approve() throws Exception {
-		Milestones milestones = new Milestones(client);
-    	JSONObject json = milestones.approve("1234", new HashMap<String, String>());
-        
-        assertTrue(json instanceof JSONObject);
-	}
+        // DEPRECATED
+    }
 	
 	@Test public void delete() throws Exception {
-		Milestones milestones = new Milestones(client);
-    	JSONObject json = milestones.delete("1234");
-        
-        assertTrue(json instanceof JSONObject);
-	}
+        // DEPRECATED
+    }
 }

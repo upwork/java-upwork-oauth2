@@ -51,7 +51,7 @@ public final class Search {
 	 * @return	{@link JSONObject}
      */
     public JSONObject find(HashMap<String, String> params) throws JSONException {   
-        return oClient.get("/profiles/v2/search/providers", params);
+        throw new UnsupportedOperationException("The legacy API was deprecated. Please, use GraphQL call - see example in this library.");
     }
 
 }

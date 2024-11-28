@@ -51,7 +51,7 @@ public final class Jobs {
 	 * @return	{@link JSONObject}
      */
     public JSONObject getList(HashMap<String, String> params) throws JSONException {
-        return oClient.get("/hr/v2/jobs", params);
+        throw new UnsupportedOperationException("The legacy API was deprecated. Please, use GraphQL call - see example in this library.");
     }
 
     /**
@@ -62,7 +62,7 @@ public final class Jobs {
 	 * @return	{@link JSONObject}
      */
     public JSONObject getSpecific(String key) throws JSONException {
-        return oClient.get("/hr/v2/jobs/" + key);
+        throw new UnsupportedOperationException("The legacy API was deprecated. Please, use GraphQL call - see example in this library.");
     }
     
     /**
@@ -73,7 +73,7 @@ public final class Jobs {
 	 * @return	{@link JSONObject}
      */
     public JSONObject postJob(HashMap<String, String> params) throws JSONException {
-        return oClient.post("/hr/v2/jobs", params);
+        throw new UnsupportedOperationException("The legacy API was deprecated. Please, use GraphQL call - see example in this library.");
     }
 
     /**
@@ -85,7 +85,7 @@ public final class Jobs {
 	 * @return	{@link JSONObject}
      */
     public JSONObject editJob(String key, HashMap<String, String> params) throws JSONException {
-        return oClient.put("/hr/v2/jobs/" + key, params);
+        throw new UnsupportedOperationException("The legacy API was deprecated. Please, use GraphQL call - see example in this library.");
     }
     
     /**
@@ -97,7 +97,7 @@ public final class Jobs {
 	 * @return	{@link JSONObject}
      */
     public JSONObject deleteJob(String key, HashMap<String, String> params) throws JSONException {
-        return oClient.delete("/hr/v2/jobs/" + key, params);
+        throw new UnsupportedOperationException("The legacy API was deprecated. Please, use GraphQL call - see example in this library.");
     }
 
 }

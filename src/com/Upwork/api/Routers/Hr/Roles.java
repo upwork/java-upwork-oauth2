@@ -48,7 +48,7 @@ public final class Roles {
 	 * @return	{@link JSONObject}
      */
     public JSONObject getAll() throws JSONException {
-        return oClient.get("/hr/v2/userroles");
+        throw new UnsupportedOperationException("The legacy API was deprecated. Please, use GraphQL call - see example in this library.");
     }
 
     /**
@@ -59,7 +59,7 @@ public final class Roles {
 	 * @return	{@link JSONObject}
      */
     public JSONObject getBySpecificUser(String reference) throws JSONException {
-        return oClient.get("/hr/v2/userroles/" + reference);
+        throw new UnsupportedOperationException("The legacy API was deprecated. Please, use GraphQL call - see example in this library.");
     }
 
 }

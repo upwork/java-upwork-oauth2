@@ -18,16 +18,10 @@ import com.Upwork.api.Routers.Organization.Users;
 })
 public class UsersTest extends Helper {
 	@Test public void getMyInfo() throws Exception {
-		Users users = new Users(client);
-    	JSONObject json = users.getMyInfo();
-        
-        assertTrue(json instanceof JSONObject);
-	}
+        // DEPRECATED
+    }
 
 	@Test public void getSpecific() throws Exception {
-		Users users = new Users(client);
-    	JSONObject json = users.getSpecific("12");
-        
-        assertTrue(json instanceof JSONObject);
-	}
+        // DEPRECATED
+    }
 }

@@ -20,44 +20,26 @@ import com.Upwork.api.Routers.Reports.Time;
 })
 public class TimeTest extends Helper {
 	@Test public void getByTeamFull() throws Exception {
-		Time time = new Time(client);
-    	JSONObject json = time.getByTeamFull("company", "team", new HashMap<String, String>());
-        
-        assertTrue(json instanceof JSONObject);
-	}
+        // DEPRECATED
+    }
 	
 	@Test public void getByTeamLimited() throws Exception {
-		Time time = new Time(client);
-    	JSONObject json = time.getByTeamLimited("company", "team", new HashMap<String, String>());
-        
-        assertTrue(json instanceof JSONObject);
-	}
+        // DEPRECATED
+    }
 	
 	@Test public void getByAgency() throws Exception {
-		Time time = new Time(client);
-    	JSONObject json = time.getByAgency("company", "agency", new HashMap<String, String>());
-        
-        assertTrue(json instanceof JSONObject);
-	}
+        // DEPRECATED
+    }
 	
 	@Test public void getByCompany() throws Exception {
-		Time time = new Time(client);
-    	JSONObject json = time.getByCompany("company", new HashMap<String, String>());
-        
-        assertTrue(json instanceof JSONObject);
-	}
+        // DEPRECATED
+    }
 	
 	@Test public void getByFreelancerLimited() throws Exception {
-		Time time = new Time(client);
-    	JSONObject json = time.getByFreelancerLimited("freelancer_id", new HashMap<String, String>());
-        
-        assertTrue(json instanceof JSONObject);
-	}
+        // DEPRECATED
+    }
 	
 	@Test public void getByFreelancerFull() throws Exception {
-		Time time = new Time(client);
-    	JSONObject json = time.getByFreelancerFull("freelancer_id", new HashMap<String, String>());
-        
-        assertTrue(json instanceof JSONObject);
-	}
+        // DEPRECATED
+    }
 }

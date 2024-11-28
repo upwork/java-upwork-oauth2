@@ -20,9 +20,6 @@ import com.Upwork.api.Routers.Jobs.Search;
 })
 public class SearchTest extends Helper {
 	@Test public void find() throws Exception {
-		Search search = new Search(client);
-    	JSONObject json = search.find(new HashMap<String, String>());
-        
-        assertTrue(json instanceof JSONObject);
-	}
+        // DEPRECATED
+    }
 }

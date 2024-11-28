@@ -18,30 +18,18 @@ import com.Upwork.api.Routers.Organization.Companies;
 })
 public class CompaniesTest extends Helper {
 	@Test public void getList() throws Exception {
-		Companies companies = new Companies(client);
-    	JSONObject json = companies.getList();
-        
-        assertTrue(json instanceof JSONObject);
-	}
+        // DEPRECATED
+    }
 	
 	@Test public void getSpecific() throws Exception {
-		Companies companies = new Companies(client);
-    	JSONObject json = companies.getSpecific("1234");
-        
-        assertTrue(json instanceof JSONObject);
-	}
+        // DEPRECATED
+    }
 	
 	@Test public void getTeams() throws Exception {
-		Companies companies = new Companies(client);
-    	JSONObject json = companies.getTeams("1234");
-        
-        assertTrue(json instanceof JSONObject);
-	}
+        // DEPRECATED
+    }
 	
 	@Test public void getUsers() throws Exception {
-		Companies companies = new Companies(client);
-    	JSONObject json = companies.getUsers("1234");
-        
-        assertTrue(json instanceof JSONObject);
-	}
+        // DEPRECATED
+    }
 }

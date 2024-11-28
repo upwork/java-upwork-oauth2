@@ -48,7 +48,7 @@ public final class Auth {
 	 * @return	{@link JSONObject}
 	 * */
 	public JSONObject getUserInfo() throws JSONException {
-		return oClient.get("/auth/v1/info");
+		throw new UnsupportedOperationException("The legacy API was deprecated. Please, use GraphQL call - see example in this library.");
 	}
 
 }

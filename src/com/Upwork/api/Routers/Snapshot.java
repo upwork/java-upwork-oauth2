@@ -52,7 +52,7 @@ public final class Snapshot {
      * @return	{@link JSONObject}
      */
     public JSONObject getByContract(String contractId, String ts) throws JSONException {   
-        return oClient.get("/team/v3/snapshots/contracts/" + contractId + "/" + ts);
+        throw new UnsupportedOperationException("The legacy API was deprecated. Please, use GraphQL call - see example in this library.");
     }   
 
     /** 
@@ -65,7 +65,7 @@ public final class Snapshot {
      * @return	{@link JSONObject}
      */
     public JSONObject updateByContract(String contractId, String ts, HashMap<String, String> params) throws JSONException {   
-        return oClient.put("/team/v3/snapshots/contracts/" + contractId + "/" + ts, params);
+        throw new UnsupportedOperationException("The legacy API was deprecated. Please, use GraphQL call - see example in this library.");
     }
     
     /**
@@ -77,7 +77,7 @@ public final class Snapshot {
      * @return	{@link JSONObject}
      */
     public JSONObject deleteByContract(String contractId, String ts) throws JSONException {
-        return oClient.delete("/team/v3/snapshots/contracts/" + contractId + "/" + ts);
+        throw new UnsupportedOperationException("The legacy API was deprecated. Please, use GraphQL call - see example in this library.");
     }
 
 }
